@@ -74,13 +74,19 @@ int kl1p::ValidateReconstruction(const arma::Col<klab::DoubleReal>& original, co
 
 // ---------------------------------------------------------------------------------------------------- //
 
-void	kl1p::RunExample()
+/*
+ *  N
+ *  RHO
+ *  sigma
+ * */
+void	kl1p::RunExample(klab::UInt32 N, klab::DoubleReal RHO, klab::DoubleReal SIGMA)
 {
 
    	klab::DoubleReal alpha = 0.0;			// Ratio of the cs-measurements.
     time_t now = time(0);
     std::stringstream t_ss;
-    t_ss << now;
+    //t_ss << now;
+    t_ss << N << "_" << RHO << "_" << SIGMA;
    
     std::ofstream of( (t_ss.str()+ ".csv").c_str());
 
@@ -89,8 +95,8 @@ void	kl1p::RunExample()
    	std::cout<<"from an underdetermined set of linear measurements y=A*x, "<<std::endl;
    	std::cout<<"where A is a random gaussian i.i.d sensing matrix."<<std::endl;
         
-   	klab::UInt32 n = 256;					// Size of the original signal x0.
-   	klab::DoubleReal rho = 0.05;				// Ratio of the sparsity of the signal x0.
+   	klab::UInt32 n = N;					// Size of the original signal x0.
+   	klab::DoubleReal rho = RHO;				// Ratio of the sparsity of the signal x0.
    	klab::UInt32 k = klab::UInt32(rho*n);	// Sparsity of the signal x0 (number of non-zero elements).
    	klab::UInt64 seed = 0;					// Seed used for random number generation (0 if regenerate random numbers on each launch).
     int num_of_ex = 100; // number of interation
@@ -109,9 +115,7 @@ void	kl1p::RunExample()
    	std::cout<<"Random Seed="<<klab::KRandom::Instance().seed()<<std::endl;
    	std::cout<<"=============================="<<std::endl;
         				
-   	arma::Col<klab::DoubleReal> x0;					// Original signal x0 of size n.
-   	kl1p::CreateGaussianSignal(n, k, 0.0, 1.0, x0);	// Create randomly the original signal x0.
-        
+   	   
    	if(bWrite)
    		kl1p::WriteToCSVFile(x0, "OriginalSignal.csv");	// Write x0 to a file.
 
@@ -120,9 +124,12 @@ void	kl1p::RunExample()
         for (alpha = 0.1; alpha <= 0.8; alpha += 0.1){
 #ifdef FCODE
          for(klab::UInt32 f=4; f<33; f=f*2){
+            arma::Col<klab::DoubleReal> x0;					// Original signal x0 of size n.
+   	        kl1p::CreateGaussianSignal(n, k, 0.0, 1.0, x0);	// Create randomly the original signal x0.
+     
             klab::UInt32 m = klab::UInt32(alpha*n);	// Number of cs-measurements.
             if(f>m) continue;
-            klab::TSmartPointer<kl1p::TOperator<klab::DoubleReal> > A = new kl1p::TFCODEGaussianMatrixOperator<klab::DoubleReal>(m, n, 0.0, 1.0, false, f, 1.2);
+            klab::TSmartPointer<kl1p::TOperator<klab::DoubleReal> > A = new kl1p::TFCODEGaussianMatrixOperator<klab::DoubleReal>(m, n, 0.0, 1.0, false, f, SIGMA);
 #else
             klab::UInt32 m = klab::UInt32(alpha*n);	// Number of cs-measurements.
             klab::TSmartPointer<kl1p::TOperator<klab::DoubleReal> > A = new kl1p::TNormalRandomMatrixOperator<klab::DoubleReal>(m, n, 0.0, 1.0);
@@ -133,6 +140,9 @@ void	kl1p::RunExample()
 
             for(int i=0; i<num_of_ex; i++){
         		// Perform cs-measurements of size m.
+                arma::Col<klab::DoubleReal> x0;					// Original signal x0 of size n.
+   	            kl1p::CreateGaussianSignal(n, k, 0.0, 1.0, x0);	// Create randomly the original signal x0.
+     
         		arma::Col<klab::DoubleReal> y;
         		A->apply(x0, y);
         		

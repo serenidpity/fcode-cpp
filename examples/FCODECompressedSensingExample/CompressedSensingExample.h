@@ -13,8 +13,8 @@
 
 #ifndef KL1P_COMPRESSEDSENSINGEXAMPLE_H
 #define KL1P_COMPRESSEDSENSINGEXAMPLE_H
-//#define FCODE
 #include <KL1pInclude.h>
+#define FCODE
 
 namespace kl1p
 {
@@ -38,7 +38,8 @@ int ValidateReconstruction(const arma::Col<klab::DoubleReal>& original, const ar
 
 /// Main example function. 
 /// Run each implemented CS-algorithmes reconstruction on the same random generated signal.
-void	RunExample();
+//void	RunExample();
+void RunExample(klab::UInt32 N, klab::DoubleReal RHO, klab::DoubleReal SIGMA);
 
 // ---------------------------------------------------------------------------------------------------- //
 
