@@ -17,7 +17,7 @@
 #include <boost/bind.hpp>
 #include <boost/thread/thread.hpp>
 
-#define NUMOFTHREAD 64
+#define NUMOFTHREAD 128
 
 using namespace kl1p;
 using namespace boost;

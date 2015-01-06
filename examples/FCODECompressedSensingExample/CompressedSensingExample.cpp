@@ -116,8 +116,8 @@ void	kl1p::RunExample(klab::UInt32 N, klab::DoubleReal RHO, klab::DoubleReal SIG
    	std::cout<<"=============================="<<std::endl;
         				
    	   
-   	if(bWrite)
-   		kl1p::WriteToCSVFile(x0, "OriginalSignal.csv");	// Write x0 to a file.
+   	//if(bWrite)
+   		//kl1p::WriteToCSVFile(x0, "OriginalSignal.csv");	// Write x0 to a file.
 
     try
      	{
