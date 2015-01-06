@@ -1,6 +1,9 @@
 # Created by https://www.gitignore.io
 #
 # ### CMake ###
+#
+.DS_Store
+
 CMakeCache.txt
 CMakeFiles
 Makefile
