@@ -54,6 +54,7 @@ IF(UNIX)
 	# External headers folder.
 	INCLUDE_DIRECTORIES(../../libs/Armadillo/include)
 	INCLUDE_DIRECTORIES(../../include)
+  INCLUDE_DIRECTORIES(/opt/local/include)
 	
 	# External libraries folder.
 	LINK_DIRECTORIES(../../bin/unix/)	
@@ -82,6 +83,7 @@ IF(APPLE)
 	# External headers folder.
 	INCLUDE_DIRECTORIES(../../libs/Armadillo/include)
 	INCLUDE_DIRECTORIES(../../include)
+  INCLUDE_DIRECTORIES(/opt/local/include)
 	
 	# External libraries folder.
 	LINK_DIRECTORIES(../../bin/macos/)	

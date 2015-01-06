@@ -13,6 +13,10 @@
 
 #include "../CompressedSensingExample.h" 
 
+#include <boost/asio/io_service.hpp>
+#include <boost/bind.hpp>
+#include <boost/thread/thread.hpp>
+
 using namespace kl1p;
 
 

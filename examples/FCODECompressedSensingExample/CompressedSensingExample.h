@@ -13,7 +13,7 @@
 
 #ifndef KL1P_COMPRESSEDSENSINGEXAMPLE_H
 #define KL1P_COMPRESSEDSENSINGEXAMPLE_H
-#define FCODE
+//#define FCODE
 #include <KL1pInclude.h>
 
 namespace kl1p
@@ -33,6 +33,8 @@ void	CreateGaussianSignal(klab::UInt32 size, klab::UInt32 sparsity, klab::Double
 /// @param signal	[in] Signal to write.
 /// @param filePath	[in] Path to the file to create.
 void	WriteToCSVFile(const arma::Col<klab::DoubleReal>& signal, const std::string& filePath);
+
+int ValidateReconstruction(const arma::Col<klab::DoubleReal>& original, const arma::Col<klab::DoubleReal>& compare, klab::DoubleReal tol);
 
 /// Main example function. 
 /// Run each implemented CS-algorithmes reconstruction on the same random generated signal.

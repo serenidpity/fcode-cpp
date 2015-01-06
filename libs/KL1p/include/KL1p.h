@@ -63,6 +63,7 @@
 #include "RandomBernoulliDiagonalOperator.h"
 #include "BernoulliRandomMatrixOperator.h"
 #include "FCODERandomMatrixOperator.h"
+#include "FCODEGaussianMatrixOperator.h"
 #include "PermutationOperator.h"
 #include "RandomPermutationOperator.h"
 #include "ScalingOperator.h"
