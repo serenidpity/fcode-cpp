@@ -17,7 +17,7 @@
 #include <boost/bind.hpp>
 #include <boost/thread/thread.hpp>
 
-#define NUMOFTHREAD 128
+#define NUMOFTHREAD 64
 
 using namespace kl1p;
 using namespace boost;
@@ -43,23 +43,33 @@ int main(int argc, char* argv[])
 
     boost::asio::io_service::work work(ioService);
 
+    std::cout << "INIT THREAD" << std::endl;
     for(int i = 0; i<NUMOFTHREAD; i++){
         threadpool.create_thread(
                     boost::bind(&boost::asio::io_service::run, &ioService)
                 );
     }
 
-    int Ns[] = {128, 256, 512};
+    int Ns[] = {512};
     double Sigmas[] = {0.8, 0.9, 1.0, 1.1, 1.2};
 
-    for(int i=0; i<3; i++){
+    std::cout << "INIT PARAMS" << std::endl;
+    //for(int i=0; i<1; i++){
+#ifdef FCODE
         for(int j=0; j<5; j++){
             for(double rho = 0.05; rho < 0.5; rho+=0.05){
-                params_t param = {Ns[i] , Sigmas[j], rho};
+                params_t param = {Ns[0] , Sigmas[j], rho};
                 ioService.post(boost::bind(runExample, param));
             }
         }
-    }
+#else
+        for(double rho = 0.05; rho < 0.5; rho+=0.05){
+            params_t param = {Ns[i] , 100, rho};
+            ioService.post(boost::bind(runExample, param));
+        }
+#endif 
+
+    //}
 
     ioService.stop();
     threadpool.join_all();
