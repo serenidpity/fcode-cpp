@@ -4,6 +4,8 @@
 #
 .DS_Store
 
+examples/FCODECompressedSensingExample/CMakeLists.txt
+
 CMakeCache.txt
 CMakeFiles
 Makefile
