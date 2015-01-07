@@ -168,7 +168,7 @@ void	kl1p::RunExample(klab::UInt32 N, klab::DoubleReal RHO, klab::DoubleReal SIG
         //		std::cout<<"End of example."<<std::endl;
         	}
 #ifdef FCODE
-            of << "FCODE," <<  n << "," << m << "," << k << "," << "SIGMA" << "," << f << "," << count_of_succeed << std::endl;
+            of << "FCODE," <<  n << "," << m << "," << k << "," << SIGMA << "," << f << "," << count_of_succeed << std::endl;
 #else
             of << "GAUSSIAN," <<  n << "," << m << "," << k << "," << "0.0," << "0" << "," << count_of_succeed << std::endl;
 #endif
